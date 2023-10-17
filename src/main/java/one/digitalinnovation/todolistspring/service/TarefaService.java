@@ -1,21 +1,20 @@
-package one.digitalinnovation.service;
+package one.digitalinnovation.todolistspring.service;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-import java.util.Comparator;
 
+import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.apache.commons.collections4.IterableUtils;
-
-import one.digitalinnovation.model.Tarefa;
-import one.digitalinnovation.model.Usuario;
-import one.digitalinnovation.repository.TarefaRepository;
-import one.digitalinnovation.repository.UsuarioRepository;
+import one.digitalinnovation.todolistspring.model.Tarefa;
+import one.digitalinnovation.todolistspring.model.Usuario;
+import one.digitalinnovation.todolistspring.repository.TarefaRepository;
+import one.digitalinnovation.todolistspring.repository.UsuarioRepository;
 
 @Service
 public class TarefaService implements ITarefaService {
@@ -99,5 +98,10 @@ public class TarefaService implements ITarefaService {
                     && x.getData().after(data1)).toList();                    
         }
         return null;
+    }
+
+    @Override
+    public Tarefa adicionaTarefa(Tarefa tarefa) {
+        return tarefaRepository.save(tarefa);                
     }
 }

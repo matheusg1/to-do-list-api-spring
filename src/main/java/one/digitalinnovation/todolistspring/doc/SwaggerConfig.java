@@ -1,4 +1,4 @@
-package one.digitalinnovation.doc;
+package one.digitalinnovation.todolistspring.doc;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -12,10 +12,8 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-@EnableSwagger2
 public class SwaggerConfig {
 
     private Contact contato() {
@@ -25,7 +23,7 @@ public class SwaggerConfig {
                 "adas@email.com");
     }
 
-    private ApiInfoBuilder informacoesApi(){
+    private ApiInfoBuilder informacoesApi() {
         ApiInfoBuilder apiInfoBuilder = new ApiInfoBuilder();
         apiInfoBuilder.title("Titulo - API");
 
@@ -36,21 +34,21 @@ public class SwaggerConfig {
         apiInfoBuilder.contact(this.contato());
         return apiInfoBuilder;
     }
-
+    
     @Bean
-    public Docket detalheApi(){
-        Docket docket = new Docket(DocumentationType.SWAGGER_2);   
+    public Docket detalheApi() {
+        Docket docket = new Docket(DocumentationType.SWAGGER_2);
 
         docket
-        .select()
-        .apis(RequestHandlerSelectors.any())
-        .paths(PathSelectors.any())
-        .build()              
-        .apiInfo(this.informacoesApi().build())
-        .consumes(new HashSet<String>(Arrays.asList("application/json")))
-        .produces(new HashSet<String>(Arrays.asList("application/json")));
-        
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build()
+                .apiInfo(this.informacoesApi().build())
+                .consumes(new HashSet<String>(Arrays.asList("application/json")))
+                .produces(new HashSet<String>(Arrays.asList("application/json")));
+
         return docket;
     }
-    
+
 }

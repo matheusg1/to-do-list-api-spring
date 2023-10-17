@@ -1,10 +1,9 @@
-package one.digitalinnovation.service;
+package one.digitalinnovation.todolistspring.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import one.digitalinnovation.model.Tarefa;
+import one.digitalinnovation.todolistspring.model.Tarefa;
 
 public interface ITarefaService {
     Iterable<Tarefa> buscaTodasTarefas();
@@ -13,4 +12,5 @@ public interface ITarefaService {
     List<Tarefa> buscaTarefasPorLogin(String login);
     Tarefa buscaTarefaMaisProximaPorLogin(String login);
     Iterable<Tarefa> buscaTarefasPorLoginEPeriodo(String login, Date data1, Date data2);
+    Tarefa adicionaTarefa(Tarefa tarefa);
 }

@@ -1,26 +1,38 @@
-package one.digitalinnovation.model;
+package one.digitalinnovation.todolistspring.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Usuario {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     
+    public Long getId() {
+        return id;
+    }
+
     private String nome;
     private String login;
+    
+    @OneToMany
+    private List<Tarefa> tarefas = new ArrayList<>();
 
-    @ManyToOne
-    private List<Tarefa> tarefas;
-
+    public Usuario(String nome, String login) {
+        this.nome = nome;
+        this.login = login;
+    }
+    public Usuario() {
+    }
     public List<Tarefa> getTarefas() {
         return tarefas;
     }
@@ -39,6 +51,7 @@ public class Usuario {
 
     public void adicionaTarefa(Tarefa tarefa){
         this.tarefas.add(tarefa);
+        tarefa.setUsuario(this);        
     }
 
     public void removeTarefa(String titulo){
@@ -47,6 +60,6 @@ public class Usuario {
 
         if(tarefaParaRemover.isPresent()){
             tarefas.remove(tarefaParaRemover.get());
-        }
+        }        
     }
 }
